@@ -1,5 +1,7 @@
 name: prebuilt
 on:
+  schedule:
+    - cron: '0 10 * * 1-5'
   push:
     paths:
       - '.github/workflows/prebuilt.yml'
