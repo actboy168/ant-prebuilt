@@ -25,6 +25,8 @@ jobs:
           pkg/
           test/
           tools/
+          README.md
+          LICENSE
   macos:
     runs-on: macos-13
     steps:
@@ -46,3 +48,5 @@ jobs:
           pkg/
           test/
           tools/
+          README.md
+          LICENSE
