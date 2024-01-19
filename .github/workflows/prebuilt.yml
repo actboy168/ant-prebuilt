@@ -6,7 +6,7 @@ on:
     paths:
       - '.github/workflows/prebuilt.yml'
 jobs:
-  msvc:
+  windows:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v3
@@ -19,6 +19,27 @@ jobs:
     - uses: actions/upload-artifact@v4
       with:
         name: ant-windows
+        path: |
+          bin/
+          engine/
+          pkg/
+          test/
+          tools/
+  macos:
+    runs-on: macos-13
+    steps:
+    - name: switch to Xcode 15.1
+      run: sudo xcode-select -s "/Applications/Xcode_15.1.app"
+    - uses: actions/checkout@v3
+      with:
+        repository: ejoy/ant
+        submodules: true
+    - uses: actboy168/setup-luamake@master
+    - run: luamake -mode release -arch arm64
+    - run: luamake -mode release -arch arm64 tools
+    - uses: actions/upload-artifact@v4
+      with:
+        name: ant-macos
         path: |
           bin/
           engine/
