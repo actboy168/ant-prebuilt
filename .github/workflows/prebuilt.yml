@@ -1,0 +1,25 @@
+name: prebuilt
+on:
+  push:
+    paths:
+      - '.github/workflows/prebuilt.yml'
+jobs:
+  msvc:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        repository: ejoy/ant
+        submodules: true
+    - uses: actboy168/setup-luamake@master
+    - run: luamake -mode release
+    - run: luamake -mode release tools
+    - uses: actions/upload-artifact@v4
+      with:
+        name: ant-windows
+        path: |
+          bin/
+          engine/
+          pkg/
+          test/
+          tools/
