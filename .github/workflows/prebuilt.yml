@@ -10,14 +10,16 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: windows-latest
+          - os: windows
+            os_version: latest
             arch: x86_64
-          - os: macos-13
+          - os: macos
+            os_version: 13
             arch: arm64
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}-${{ matrix.os_version }}
     steps:
     - name: switch to Xcode 15.1
-      if: ${{ runner.os == 'macOS' }}
+      if: ${{ matrix.os == 'macos' }}
       run: sudo xcode-select -s "/Applications/Xcode_15.1.app"
     - uses: actions/checkout@v3
       with:
@@ -27,7 +29,7 @@ jobs:
     - run: luamake all -mode release -arch ${{ matrix.arch }}
     - uses: actions/upload-artifact@v4
       with:
-        name: ant-${{ runner.os }}-${{ matrix.arch }}
+        name: ant-${{ matrix.os }}-${{ matrix.arch }}
         path: |
           bin/
           engine/
