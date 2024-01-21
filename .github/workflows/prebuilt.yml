@@ -35,6 +35,7 @@ jobs:
           !bin/**/*.a
           !bin/**/*.exp
           !bin/**/*.lib
+          !bin/**/*.ilk
           engine/
           pkg/
           test/
