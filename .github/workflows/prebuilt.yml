@@ -32,6 +32,9 @@ jobs:
         name: ant-${{ matrix.os }}-${{ matrix.arch }}
         path: |
           bin/
+          !bin/**/*.a
+          !bin/**/*.exp
+          !bin/**/*.lib
           engine/
           pkg/
           test/
