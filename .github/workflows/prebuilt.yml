@@ -14,11 +14,10 @@ jobs:
         repository: ejoy/ant
         submodules: true
     - uses: actboy168/setup-luamake@master
-    - run: luamake -mode release
-    - run: luamake -mode release tools
+    - run: luamake all -mode release -arch x86_64
     - uses: actions/upload-artifact@v4
       with:
-        name: ant-windows
+        name: ant-windows-x86_64
         path: |
           bin/
           engine/
@@ -37,11 +36,10 @@ jobs:
         repository: ejoy/ant
         submodules: true
     - uses: actboy168/setup-luamake@master
-    - run: luamake -mode release -arch arm64
-    - run: luamake -mode release -arch arm64 tools
+    - run: luamake all -mode release -arch arm64
     - uses: actions/upload-artifact@v4
       with:
-        name: ant-macos
+        name: ant-macos-arm64
         path: |
           bin/
           engine/
