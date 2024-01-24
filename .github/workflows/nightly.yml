@@ -30,7 +30,7 @@ jobs:
         repository: ejoy/ant
         submodules: true
     - run: luamake all -mode release -arch ${{ matrix.arch }}
-    - uses: actboy168/action-zip@master
+    - uses: actboy168/action-zip@main
       with:
         output: ant-${{ matrix.os }}-${{ matrix.arch }}.zip
         path:
