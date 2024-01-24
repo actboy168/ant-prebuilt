@@ -8,7 +8,7 @@ on:
     paths:
       - '.github/workflows/nightly.yml'
 jobs:
-  prebuilt:
+  nightly:
     strategy:
       fail-fast: false
       matrix:
