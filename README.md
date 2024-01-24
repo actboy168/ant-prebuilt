@@ -1,5 +1,4 @@
 # ant-prebuilt
 
-[![nightly](https://github.com/actboy168/ant-prebuilt/actions/workflows/nightly.yml/badge.svg)](https://github.com/actboy168/ant-prebuilt/actions/workflows/nightly.yml)
+See [nightly](https://github.com/actboy168/ant-prebuilt/releases/tag/nightly).
 
-Pre built [Ant Engine](https://github.com/ejoy/ant).
