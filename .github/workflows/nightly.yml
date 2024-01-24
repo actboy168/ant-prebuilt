@@ -31,7 +31,7 @@ jobs:
     - uses: actboy168/action-zip@main
       with:
         output: ant-${{ matrix.os }}-${{ matrix.arch }}.zip
-        path:
+        path: |
           bin/
           !bin/**/*.a
           !bin/**/*.exp
