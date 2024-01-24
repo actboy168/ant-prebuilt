@@ -8,6 +8,7 @@ on:
 jobs:
   prebuilt:
     strategy:
+      fail-fast: false
       matrix:
         include:
           - os: windows
@@ -26,7 +27,6 @@ jobs:
         repository: ejoy/ant
         submodules: true
     - uses: actboy168/setup-luamake@master
-    - run: luamake all -mode release -arch ${{ matrix.arch }}
     - uses: actions/upload-artifact@v4
       with:
         name: ant-${{ matrix.os }}-${{ matrix.arch }}
