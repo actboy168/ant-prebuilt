@@ -42,6 +42,9 @@ jobs:
           tools/
           README.md
           LICENSE
+    - uses: actions/download-artifact@v4
+      with:
+        name: ant-${{ matrix.os }}-${{ matrix.arch }}
     - name: Release nightly
       uses: softprops/action-gh-release@v1
       with:
@@ -50,4 +53,4 @@ jobs:
         tag_name: nightly
         fail_on_unmatched_files: true
         files: |
-          bin/
+          ant-${{ matrix.os }}-${{ matrix.arch }}.zip
