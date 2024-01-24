@@ -26,7 +26,6 @@ jobs:
       with:
         repository: ejoy/ant
         submodules: true
-    - uses: actboy168/setup-luamake@master
     - uses: actions/upload-artifact@v4
       with:
         name: ant-${{ matrix.os }}-${{ matrix.arch }}
@@ -45,6 +44,7 @@ jobs:
     - uses: actions/download-artifact@v4
       with:
         name: ant-${{ matrix.os }}-${{ matrix.arch }}
+    - run: ls -R
     - name: Release nightly
       uses: softprops/action-gh-release@v1
       with:
