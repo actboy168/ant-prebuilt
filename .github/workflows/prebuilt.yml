@@ -53,4 +53,4 @@ jobs:
         tag_name: nightly
         fail_on_unmatched_files: true
         files: |
-          ant-${{ matrix.os }}-${{ matrix.arch }}.zip
+          ${{steps.download.outputs.download-path}}/*.zip
