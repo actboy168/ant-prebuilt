@@ -44,7 +44,8 @@ jobs:
     - uses: actions/download-artifact@v4
       with:
         name: ant-${{ matrix.os }}-${{ matrix.arch }}
-    - run: ls -R
+        path: publish
+    - run: ls -R publish
     - name: Release nightly
       uses: softprops/action-gh-release@v1
       with:
@@ -53,4 +54,4 @@ jobs:
         tag_name: nightly
         fail_on_unmatched_files: true
         files: |
-          ${{steps.download.outputs.download-path}}/*.zip
+          ${{steps.download.outputs.download-path}}
