@@ -26,10 +26,10 @@ jobs:
       with:
         repository: ejoy/ant
         submodules: true
-    - uses: actions/upload-artifact@v4
+    - uses: vimtor/action-zip@v1.1
       with:
-        name: ant-${{ matrix.os }}-${{ matrix.arch }}
-        path: |
+        dest: ant-${{ matrix.os }}-${{ matrix.arch }}.zip
+        files:
           bin/
           !bin/**/*.a
           !bin/**/*.exp
@@ -41,11 +41,6 @@ jobs:
           tools/
           README.md
           LICENSE
-    - uses: actions/download-artifact@v4
-      with:
-        name: ant-${{ matrix.os }}-${{ matrix.arch }}
-        path: publish
-    - run: ls -R publish
     - name: Release nightly
       uses: softprops/action-gh-release@v1
       with:
@@ -54,4 +49,4 @@ jobs:
         tag_name: nightly
         fail_on_unmatched_files: true
         files: |
-          ${{steps.download.outputs.download-path}}
+          ant-${{ matrix.os }}-${{ matrix.arch }}.zip
