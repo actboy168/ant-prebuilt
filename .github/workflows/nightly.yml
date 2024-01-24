@@ -30,10 +30,10 @@ jobs:
         repository: ejoy/ant
         submodules: true
     - run: luamake all -mode release -arch ${{ matrix.arch }}
-    - uses: vimtor/action-zip@v1.1
+    - uses: actboy168/action-zip@master
       with:
-        dest: ant-${{ matrix.os }}-${{ matrix.arch }}.zip
-        files:
+        output: ant-${{ matrix.os }}-${{ matrix.arch }}.zip
+        path:
           bin/
           !bin/**/*.a
           !bin/**/*.exp
