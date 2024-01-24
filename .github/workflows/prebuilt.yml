@@ -42,3 +42,12 @@ jobs:
           tools/
           README.md
           LICENSE
+    - name: Release nightly
+      uses: softprops/action-gh-release@v1
+      with:
+        prerelease: true
+        name: nightly
+        tag_name: nightly
+        fail_on_unmatched_files: true
+        files: |
+          bin/
