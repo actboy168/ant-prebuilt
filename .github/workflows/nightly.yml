@@ -24,10 +24,12 @@ jobs:
     - name: switch to Xcode 15.1
       if: ${{ matrix.os == 'macos' }}
       run: sudo xcode-select -s "/Applications/Xcode_15.1.app"
+    - uses: actboy168/setup-luamake@master
     - uses: actions/checkout@v3
       with:
         repository: ejoy/ant
         submodules: true
+    - run: luamake all -mode release -arch ${{ matrix.arch }}
     - uses: actboy168/action-zip@main
       with:
         output: ant-${{ matrix.os }}-${{ matrix.arch }}.zip
