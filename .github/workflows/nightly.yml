@@ -13,6 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - run: git push --delete origin nightly
+      continue-on-error: true
   nightly:
     needs: init
     strategy:
