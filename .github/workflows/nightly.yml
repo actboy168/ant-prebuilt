@@ -9,7 +9,7 @@ on:
       - '.github/workflows/nightly.yml'
 jobs:
   init:
-    runs-on: unbuntu-latest
+    runs-on: ubuntu-latest
     steps:
     - run: git push --delete origin nightly
   nightly:
