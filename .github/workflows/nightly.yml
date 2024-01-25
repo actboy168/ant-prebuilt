@@ -31,8 +31,9 @@ jobs:
         submodules: true
     - run: luamake all -mode release -arch ${{ matrix.arch }}
     - uses: actboy168/action-zip@main
+      id: zip
       with:
-        output: ant-${{ matrix.os }}-${{ matrix.arch }}.zip
+        name: ant-${{ matrix.os }}-${{ matrix.arch }}
         path: |
           bin/
           !bin/**/*.a
@@ -45,12 +46,10 @@ jobs:
           tools/
           README.md
           LICENSE
-    - name: Release nightly
-      uses: softprops/action-gh-release@v1
+    - uses: softprops/action-gh-release@v1
       with:
         prerelease: true
         name: nightly
         tag_name: nightly
         fail_on_unmatched_files: true
-        files: |
-          ant-${{ matrix.os }}-${{ matrix.arch }}.zip
+        files: ${{  steps.zip.outputs.output }}
