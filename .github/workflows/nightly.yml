@@ -19,7 +19,7 @@ jobs:
             owner: context.repo.owner,
             repo: context.repo.repo,
           })
-          releaseIds = (releases.data ?? [])
+          releaseIds = releases.data
             .filter(({ tag_name }) => tag_name === 'nightly')
             .map(({ id }) => id);
           for (const release_id of releaseIds) {
