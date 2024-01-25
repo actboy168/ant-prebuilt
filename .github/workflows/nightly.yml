@@ -13,7 +13,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
       with:
-        repository: ejoy/ant
         sparse-checkout: ''
         sparse-checkout-cone-mode: false
     - run: git push --delete origin nightly
