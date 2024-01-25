@@ -11,12 +11,10 @@ jobs:
   init:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: dev-drprasad/delete-tag-and-release@v1.0
       with:
-        sparse-checkout: ''
-        sparse-checkout-cone-mode: false
-    - run: git push --delete origin nightly
-      continue-on-error: true
+        tag_name: nightly
+        delete_release: true
   nightly:
     needs: init
     strategy:
