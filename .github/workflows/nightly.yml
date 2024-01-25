@@ -8,7 +8,12 @@ on:
     paths:
       - '.github/workflows/nightly.yml'
 jobs:
+  init:
+    runs-on: unbuntu-latest
+    steps:
+    - run: git push --delete origin nightly
   nightly:
+    needs: init
     strategy:
       fail-fast: false
       matrix:
