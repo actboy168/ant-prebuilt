@@ -11,6 +11,7 @@ jobs:
   init:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v4
     - run: git push --delete origin nightly
   nightly:
     needs: init
