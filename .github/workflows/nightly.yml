@@ -14,7 +14,7 @@ jobs:
     - uses: actions/github-script@v7 
       with: 
         script: |
-          const releases = github.rest.repos.listReleases({
+          const releases = await github.rest.repos.listReleases({
             owner: context.repo.owner,
             repo: context.repo.repo,
           })
@@ -25,7 +25,7 @@ jobs:
             }
           }
           for (const release_id of releaseIds) {
-            github.rest.repos.deleteRelease({
+            await github.rest.repos.deleteRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
               release_id: release_id,
