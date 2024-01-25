@@ -11,10 +11,24 @@ jobs:
   init:
     runs-on: ubuntu-latest
     steps:
-    - uses: dev-drprasad/delete-tag-and-release@v1.0
-      with:
-        tag_name: nightly
-        delete_release: true
+    - uses: actions/github-script@v7 
+      with: 
+        script: |
+          let releaseIds = [];
+          const releases = github.rest.repos.listReleases({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+          })
+          releaseIds = (releases.data ?? [])
+            .filter(({ tag_name }) => tag_name === 'nightly')
+            .map(({ id }) => id);
+          for (const release_id of releaseIds) {
+            github.rest.repos.deleteRelease({
+              context.repo.owner,
+              context.repo.repo,
+              release_id,
+            });
+          }
   nightly:
     needs: init
     strategy:
