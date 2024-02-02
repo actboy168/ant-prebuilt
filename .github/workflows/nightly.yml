@@ -38,27 +38,22 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: windows
-            os_version: latest
-            arch: x86_64
-          - os: macos
-            os_version: 13
-            arch: arm64
-    runs-on: ${{ matrix.os }}-${{ matrix.os_version }}
+          - os: windows-latest
+            name: windows-x86_64
+          - os: macos-14
+            name: macos-arm64
+    runs-on: ${{ matrix.os }}
     steps:
-    - name: switch to Xcode 15.1
-      if: ${{ matrix.os == 'macos' }}
-      run: sudo xcode-select -s "/Applications/Xcode_15.1.app"
     - uses: actboy168/setup-luamake@master
     - uses: actions/checkout@v4
       with:
         repository: ejoy/ant
         submodules: true
-    - run: luamake all -mode release -arch ${{ matrix.arch }}
+    - run: luamake all -mode release
     - uses: actboy168/action-zip@main
       id: zip
       with:
-        name: ant-${{ matrix.os }}-${{ matrix.arch }}
+        name: ant-${{ matrix.name }}
         path: |
           bin/
           !bin/**/*.a
