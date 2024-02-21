@@ -17,7 +17,7 @@ jobs:
             repo: context.repo.repo,
           });
           for (const release of releases.data) {
-            if (release.name === 'nightly') {
+            if (release.tag_name === 'nightly') {
               await github.rest.repos.deleteRelease({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
@@ -25,6 +25,13 @@ jobs:
               });
             }
           }
+          try {
+            await github.rest.git.deleteRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: `tags/nightly`,
+            });
+          } catch (error) {}
   nightly:
     needs: init
     strategy:
@@ -63,5 +70,6 @@ jobs:
       with:
         prerelease: true
         name: nightly
+        tag_name: nightly
         fail_on_unmatched_files: true
         files: ${{  steps.zip.outputs.output }}
