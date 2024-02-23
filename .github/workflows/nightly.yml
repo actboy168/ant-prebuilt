@@ -72,3 +72,15 @@ jobs:
         tag_name: nightly
         fail_on_unmatched_files: true
         files: ${{  steps.zip.outputs.output }}
+  finish:
+    needs: nightly
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/github-script@v7 
+      with: 
+        script: |
+          await github.rest.git.deleteRef({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            ref: `tags/nightly`,
+          });
